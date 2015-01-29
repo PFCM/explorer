@@ -31,8 +31,9 @@ public class ExplorerGui {
 		// get the simulation ready
 		world = new ExplorerWorld(10,10);
 		explorers = new ArrayList<>();
-		explorers.add(new DumbExplorer(world));
-		explorers.add(new OptimalExplorer(world));
+		//explorers.add(new DumbExplorer(world));
+		//explorers.add(new OptimalExplorer(world));
+		explorers.add(new EntropicExplorer(world));
 
 		// set up actual GUI stuff
 		canvas = new JPanel() { // this is a bit cheeky, especially the size bit
@@ -137,7 +138,7 @@ public class ExplorerGui {
 
 		// draw all of our little people
 		for (Explorer e : explorers) {
-			int[] state = world.getState(e); // TODO handle multiple
+			int[] state = world.getState(e);
 			g.setColor(e.getColor());
 			g.fillOval(state[0]*cellSize, state[1]*cellSize, cellSize, cellSize);
 			int sx=state[0]*cellSize + cellSize/2;
