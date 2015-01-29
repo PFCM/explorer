@@ -30,6 +30,8 @@ public class OptimalExplorer implements Explorer {
 	/** Our table for precomputing good actions */
 	private Action[][] opt;
 
+	private boolean useFast = true;
+
 	public OptimalExplorer(ExplorerWorld world) {
 		world.addExplorer(this);
 		this.world = world; // have to promise not to cheat
@@ -43,10 +45,17 @@ public class OptimalExplorer implements Explorer {
 		}
 	}
 
+	/** choose whether it is fast or slow, mainly to test that they behave the same */
+	public OptimalExplorer(ExplorerWorld world, boolean fast) {
+		this(world);
+		useFast = fast;
+	}
+
 	@Override
 	public int getSensorAction() {
-		//return getSensorActionSlowly();
-		return getSensorActionQuicker();
+		if (useFast)
+			return getSensorActionQuicker();
+		return getSensorActionSlowly();
 	}
 
 	/** precomputes a table then figures out the best way to look */
@@ -73,6 +82,8 @@ public class OptimalExplorer implements Explorer {
 				astar = a;
 			}
 		}
+		System.out.println(world.actionToString(astar) + " (value: " + astarval + ")");
+		lastSensorAction = astar;
 		return astar;
 	}
 
@@ -177,8 +188,9 @@ public class OptimalExplorer implements Explorer {
 
 	@Override
 	public int getAction() { // uses current beliefs -- ie. assumes they have been updated already
-		//return getActionSlowly();
-		return getActionFaster();
+		int bstar = (useFast)? getActionFaster() : getActionSlowly();
+		advanceBeliefs(bstar);
+		return bstar;
 	}
 	/** slightly cleverer */
 	private int getActionFaster() {
@@ -216,7 +228,6 @@ public class OptimalExplorer implements Explorer {
 
 		System.out.println("(OptimalExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
 		lastAction = bstar;
-		advanceBeliefs(bstar);
 		return bstar;
 	}
 

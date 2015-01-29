@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.99;
+	private double observationProbability = 0.9;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
@@ -41,7 +41,7 @@ public class ExplorerWorld {
 	/** Generates a (currently random) world with a randomly placed agent. Needs to know how big */
 	public ExplorerWorld(int w, int h) {
 		// get the random going
-		rand = new Random(0xfadeface/*System.nanoTime()*/);
+		rand = new Random(/*0xfadeface*/System.nanoTime());
 
 		target = new int[2];
 		map = noiseMap(w,h,0.1, target);
@@ -229,7 +229,7 @@ public class ExplorerWorld {
 	/** wraps into the range, inclusive of the min and max */
 	private int wrapIntoRange(int num, int min, int max) {
 		if (num > max)
-			return num-min;
+			return num-max + min;
 		if (num < min)
 			return max - (min-num);
 		return num;
