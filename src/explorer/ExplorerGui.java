@@ -28,7 +28,7 @@ public class ExplorerGui {
 
 	public ExplorerGui() {
 		// get the simulation ready
-		world = new ExplorerWorld(10,10);
+		world = new ExplorerWorld(15,15);
 		explorers = new ArrayList<>();
 		explorers.add(new OptimalExplorer(world));
 
@@ -52,7 +52,7 @@ public class ExplorerGui {
 		frame.setVisible(true);
 
 
-		new Timer(1000, new ActionListener() {
+		new Timer(1500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				step();
@@ -74,19 +74,21 @@ public class ExplorerGui {
 			System.out.println("~~~~~~~~~~~~~~~~");
 			System.out.println("Observing");
 			for (Explorer e : explorers) {
-
+				e.observe(world.getObservation(e.getLastSensorAction()));
 			}
 		}
 		if (step == 2) {
 			System.out.println("~~~~~~~~~~~~~~~~");
-			System.out.println("Getting real actions");
-		}
-		if (step == 3) {
-			System.out.println("~~~~~~~~~~~~~~~~");
-			System.out.println("Advancing state");
+			System.out.println("Getting real actions & advancing");
+
+			for (Explorer e: explorers) {
+				 world.advanceState(e.getAction());
+			}
+
 			step = -1;
 		}
 		step++;
+		canvas.repaint();
 	}
 
 
@@ -117,6 +119,49 @@ public class ExplorerGui {
 					break;
 				}
 				g.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
+			}
+		}
+
+		if (explorers.size() == 1) { // if there is only one, draw him and his beliefs (if he has any)
+			if (explorers.get(0) instanceof OptimalExplorer) {
+				OptimalExplorer opt = (OptimalExplorer) explorers.get(0);
+				double[][] bel = opt.getBeliefs();
+
+				// draw the chap
+				int[] state = world.getState(); // TODO handle multiple
+				g.setColor(Color.blue);
+				g.fillOval(state[0]*cellSize, state[1]*cellSize, cellSize, cellSize);
+				int sx=state[0]*cellSize + cellSize/2;
+				int sy = state[1]*cellSize + cellSize/2;
+				switch(opt.getLastSensorAction()) {
+				case ExplorerWorld.NORTH:
+					sy -= cellSize/2;
+					break;
+				case ExplorerWorld.SOUTH:
+					sy += cellSize/2;
+					break;
+				case ExplorerWorld.EAST:
+					sx += cellSize/2;
+					break;
+				case ExplorerWorld.WEST:
+					sx -= cellSize/2;
+					break;
+				default:
+					break;
+				}
+				g.setColor(Color.black);
+				g.drawLine(sx, sy, state[0]*cellSize+cellSize/2, state[1]*cellSize+cellSize/2);
+
+				for (int x = 0; x < map.length; x++) {
+					for (int y = 0; y < map[0].length; y++) {
+						g.setColor(Color.red);
+						g.fillRect((int) (x*cellSize + (1.0-bel[x][y])*(cellSize/2)),
+								   (int) (y*cellSize + (1.0-bel[x][y])*(cellSize/2)),
+								   (int) (cellSize*bel[x][y]),
+								   (int) (cellSize*bel[x][y]));
+					}
+				}
+
 			}
 		}
 	}
