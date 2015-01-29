@@ -41,7 +41,7 @@ public class ExplorerWorld {
 	/** Generates a (currently random) world with a randomly placed agent. Needs to know how big */
 	public ExplorerWorld(int w, int h) {
 		// get the random going
-		rand = new Random(0xdeafcade);
+		rand = new Random(/*0xdeafcade*/System.nanoTime());
 
 		target = new int[2];
 		map = noiseMap(w,h,0.5, target);

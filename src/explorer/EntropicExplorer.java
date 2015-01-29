@@ -196,11 +196,17 @@ public class EntropicExplorer implements Explorer {
 		double log2 = Math.log(2);
 		for (int x = 0; x < beliefs.length; x++) {
 			for (int y = 0; y < beliefs[0].length; y++) {
-				sum += beliefs[x][y] * (Math.log(beliefs[x][y])/log2); // because logb(n) = log(n)/log(b)
+				if (beliefs[x][y] > 0) // because we can't take log of 0 (but we can skit around it because we would be multiplying it by 0 anyway so even if it existed it wouldn't contribute to the sum)
+					sum += beliefs[x][y] * (Math.log(beliefs[x][y])/log2); // because logb(n) = log(n)/log(b)
 			}
 		}
 
 		return -sum;
+	}
+
+	@Override
+	public String toString() {
+		return "EntropicExplorer";
 	}
 
 }

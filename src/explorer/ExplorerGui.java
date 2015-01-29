@@ -29,10 +29,10 @@ public class ExplorerGui {
 
 	public ExplorerGui() {
 		// get the simulation ready
-		world = new ExplorerWorld(10,10);
+		world = new ExplorerWorld(14,14);
 		explorers = new ArrayList<>();
-		//explorers.add(new DumbExplorer(world));
-		//explorers.add(new OptimalExplorer(world));
+		explorers.add(new DumbExplorer(world));
+		explorers.add(new OptimalExplorer(world));
 		explorers.add(new EntropicExplorer(world));
 
 		// set up actual GUI stuff
