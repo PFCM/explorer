@@ -1,5 +1,7 @@
 package explorer;
 
+import java.awt.Color;
+
 /**
  * Explores the world always choosing actions that maximise the expected value for the next state transition.
  * @author mathewpaul1
@@ -24,6 +26,7 @@ public class OptimalExplorer implements Explorer {
 	private int lastAction;
 
 	public OptimalExplorer(ExplorerWorld world) {
+		world.addExplorer(this);
 		this.world = world; // have to promise not to cheat
 		beliefs = new double[world.getMap().length][world.getMap()[0].length];
 		// right know we have no idea at all
@@ -209,4 +212,13 @@ public class OptimalExplorer implements Explorer {
 		return beliefs;
 	}
 
+	@Override
+	public String toString() {
+		return "OptimalExplorer";
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.blue;
+	}
 }

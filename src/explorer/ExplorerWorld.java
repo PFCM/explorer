@@ -1,5 +1,7 @@
 package explorer;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /** Represents the world. Generates observations advances the world state,
@@ -27,9 +29,11 @@ public class ExplorerWorld {
 	public static final int WEST = 4;
 
 	/** The real position of the agent, which is the state of the world. 2 elements: x then y. */
-	private int[] state;
+	private Map<Explorer,int[]> state;
 	/** Target position -- keep track of this for calculating rewards */
 	private int[] target;
+	/** starting position -- want it to be the same for all agents so that they can be compared */
+	private int[] start;
 
 	/** Random number generator. Can keep the seed the same to test different on the same random maps */
 	private Random rand;
@@ -37,15 +41,20 @@ public class ExplorerWorld {
 	/** Generates a (currently random) world with a randomly placed agent. Needs to know how big */
 	public ExplorerWorld(int w, int h) {
 		// get the random going
-		rand = new Random(System.nanoTime()/*0xfade*/);
+		rand = new Random(0xdeafcade);
 
 		target = new int[2];
-		map = noiseMap(w,h,0.3, target);
+		map = noiseMap(w,h,0.5, target);
 
-		// random agent position
-		state = new int[2];
-		state[0] = rand.nextInt(w);
-		state[1] = rand.nextInt(h);
+
+		state = new HashMap<>();
+
+		start = new int[]{rand.nextInt(map.length), rand.nextInt(map[0].length)};
+	}
+
+	/** Starts tracking state for an explorer, initially assigning it a random location */
+	public void addExplorer(Explorer e) {
+		state.put(e, start.clone());
 	}
 
 	/**
@@ -160,9 +169,9 @@ public class ExplorerWorld {
 	}
 
 	/** generates an observation */
-	public int getObservation(int a) {
-		int ox = state[0];
-		int oy = state[1]; // coordinates of the square to be observed
+	public int getObservation(int a, Explorer e) {
+		int ox = state.get(e)[0];
+		int oy = state.get(e)[1]; // coordinates of the square to be observed
 		switch(a) {
 		case NORTH:
 			oy -= 1;
@@ -198,19 +207,19 @@ public class ExplorerWorld {
 	}
 
 	/** Moves the state on given a manipulatory action */
-	public void advanceState(int b) { // TODO: stochastic
+	public void advanceState(int b, Explorer e) { // TODO: stochastic
 		switch(b) {
 		case NORTH:
-			state[1] = Math.max(0, state[1]-1);
+			state.get(e)[1] = Math.max(0, state.get(e)[1]-1);
 			break;
 		case SOUTH:
-			state[1] = Math.min(state[1]+1, map[0].length-1);
+			state.get(e)[1] = Math.min(state.get(e)[1]+1, map[0].length-1);
 			break;
 		case EAST:
-			state[0] = Math.min(state[0]+1, map.length-1);
+			state.get(e)[0] = Math.min(state.get(e)[0]+1, map.length-1);
 			break;
 		case WEST:
-			state[0] = Math.max(0, state[0]-1);
+			state.get(e)[0] = Math.max(0, state.get(e)[0]-1);
 			break;
 		default:
 			break;
@@ -233,8 +242,8 @@ public class ExplorerWorld {
 	}
 
 	/** Returns the true state in order to draw it */
-	public int[] getState() {
-		return state;
+	public int[] getState(Explorer e) {
+		return state.get(e);
 	}
 
 	/** returns NORTH, SOUTH, EAST or WEST as appropriate */
@@ -251,5 +260,10 @@ public class ExplorerWorld {
 		default:
 			return "UNKNOWN ACTION";
 		}
+	}
+
+	/** has the agent reached the target? */
+	public boolean targetReached(Explorer e) {
+		return state.get(e)[0] == target[0] && state.get(e)[1] == target[1];
 	}
 }
