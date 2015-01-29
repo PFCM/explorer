@@ -29,7 +29,7 @@ public class ExplorerGui {
 
 	public ExplorerGui() {
 		// get the simulation ready
-		world = new ExplorerWorld(14,14);
+		world = new ExplorerWorld(12,12);
 		explorers = new ArrayList<>();
 		explorers.add(new DumbExplorer(world));
 		explorers.add(new OptimalExplorer(world));
@@ -54,7 +54,7 @@ public class ExplorerGui {
 		frame.setVisible(true);
 
 
-		new Timer(1000, new ActionListener() {
+		new Timer(100, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				step();

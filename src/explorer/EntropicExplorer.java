@@ -33,7 +33,7 @@ public class EntropicExplorer implements Explorer {
 		world = w;
 		world.addExplorer(this);
 
-		// set up initial beliefsworld.addExplorer(this);
+		// set up initial beliefs
 		beliefs = new double[world.getMap().length][world.getMap()[0].length];
 		double belief = 1.0/(world.getMap().length * world.getMap()[0].length);
 		for (int x = 0; x < beliefs.length; x++) {
@@ -68,13 +68,14 @@ public class EntropicExplorer implements Explorer {
 					}
 				ysum += xsum * entropyReduction;
 			}
+			System.out.println("(EntropicExplorer)    " + world.actionToString(a) + " : " + ysum);
 			if (ysum > astarval) {
 				astarval = ysum;
 				astar = a;
 			}
 		}
 		lastSensorAction = astar;
-		System.out.println("(EntropicExplorer) Choosing sensor action: " + world.actionToString(astar) + " (expected reduction: " + astarval + ")");
+		System.out.println("(EntropicExplorer) Choosing sensor action: " + world.actionToString(astar));
 		return astar;
 	}
 
@@ -108,7 +109,7 @@ public class EntropicExplorer implements Explorer {
 			}
 		}
 
-		System.out.println("(OptimalExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
+		System.out.println("(EntropiExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
 		lastAction = bstar;
 		advanceBeliefs(bstar);
 		return bstar;
