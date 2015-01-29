@@ -23,10 +23,10 @@ public class ExplorerWorld {
 	private double observationProbability = 0.99;
 
 	/** Directions: these are the possible actions for both camera and agent */
-	public static final int NORTH = 1;
-	public static final int SOUTH = 2;
-	public static final int EAST = 3;
-	public static final int WEST = 4;
+	public static final int NORTH = 0;
+	public static final int SOUTH = 1;
+	public static final int EAST = 2;
+	public static final int WEST = 3;
 
 	/** The real position of the agent, which is the state of the world. 2 elements: x then y. */
 	private Map<Explorer,int[]> state;

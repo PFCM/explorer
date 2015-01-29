@@ -24,11 +24,17 @@ public class OptimalExplorer implements Explorer {
 	private int lastSensorAction;
 	/** the last way we went */
 	private int lastAction;
+	/** the last thing we saw */
+	private int lastObservation;
+
+	/** Our table for precomputing good actions */
+	private Action[][] opt;
 
 	public OptimalExplorer(ExplorerWorld world) {
 		world.addExplorer(this);
 		this.world = world; // have to promise not to cheat
 		beliefs = new double[world.getMap().length][world.getMap()[0].length];
+		opt = new Action[sensorActions.length][observations.length];
 		// right know we have no idea at all
 		for (int i = 0; i < beliefs.length; i++) {
 			for (int j = 0; j < beliefs[0].length; j++) {
@@ -39,8 +45,41 @@ public class OptimalExplorer implements Explorer {
 
 	@Override
 	public int getSensorAction() {
+		//return getSensorActionSlowly();
+		return getSensorActionQuicker();
+	}
+
+	/** precomputes a table then figures out the best way to look */
+	private int getSensorActionQuicker() {
+		precompBStar(); // now we should have a table
+		// still need to look at each possible sensor action
+		double astarval = Double.NEGATIVE_INFINITY;
+		int astar = -1;
+		for (int a : sensorActions) {
+			// and sum over the possible observations
+			double ysum = 0;
+			for(int y : observations) {
+				// ...and the possible states of the world
+				double xsum = 0;
+				for (int ax = 0; ax < beliefs.length; ax++) {
+					for (int ay = 0; ay < beliefs[0].length; ay++) {
+						xsum += world.observationProbability(y, a, ax, ay) * beliefs[ax][ay] * opt[a][y].value;
+					}
+				}
+				ysum += xsum;
+			}
+			if (ysum > astarval) {
+				astarval = ysum;
+				astar = a;
+			}
+		}
+		return astar;
+	}
+
+	/** does the whole messy calculation. Impractical on anything bigger than 15 or so. Could be pruned somewhat, but still. */
+	private int getSensorActionSlowly() {
 		System.out.print("(OptimalExplorer) Choosing sensor action: ");
-		// this is a bit naive, can do some pre-computation in future
+		// this is a bit naive, could (should) only look at possible state transitions
 		int astar = -1;
 		double astarval = Double.NEGATIVE_INFINITY;
 
@@ -138,6 +177,16 @@ public class OptimalExplorer implements Explorer {
 
 	@Override
 	public int getAction() { // uses current beliefs -- ie. assumes they have been updated already
+		//return getActionSlowly();
+		return getActionFaster();
+	}
+	/** slightly cleverer */
+	private int getActionFaster() {
+		return opt[lastSensorAction][lastObservation].action;
+	}
+
+	/** the naive way */
+	private int getActionSlowly() {
 		int bstar = -1;
 		double bstarval = Double.NEGATIVE_INFINITY;
 		for (int b : actions) {
@@ -196,10 +245,47 @@ public class OptimalExplorer implements Explorer {
 		beliefs = newbel;
 	}
 
+	/** Precomputes a table of actions and observations given a set of beliefs */
+	private Action[][] precompBStar() {
+
+		for (int a : sensorActions) {
+			for (int y : observations) {
+				double[][] bel = updateBeliefs(a,y);
+				int bstar = -1;
+				double bstarval = Double.NEGATIVE_INFINITY;
+				for (int b : actions) {
+					double sumx = 0;
+					for (int ax = 0; ax < beliefs.length; ax++) {
+						for (int ay = 0; ay < beliefs[0].length; ay++) {
+							double sumxp = 0;
+							for (int axp = 0; axp < beliefs.length; axp++) {
+								for (int ayp = 0; ayp < beliefs[0].length; ayp++) {
+									sumxp += world.transitionProbability(axp, ayp, ax, ay, b) * world.getReward(new int[]{axp,ayp});
+								}
+							}
+							sumx += bel[ax][ay]*sumxp;
+						}
+					}
+					if (sumx > bstarval) {
+						bstarval = sumx;
+						bstar = b;
+					}
+				}
+				if (opt[a][y] == null)
+					opt[a][y] = new Action();
+				opt[a][y].action = bstar;
+				opt[a][y].value = bstarval;
+			}
+		}
+
+		return opt;
+	}
+
 	@Override
 	public void observe(int y) {
 		System.out.println("(OptimalExplorer) Observing: " + y);
 		beliefs = updateBeliefs(lastSensorAction, y);
+		lastObservation = y;
 	}
 
 	@Override
@@ -220,5 +306,10 @@ public class OptimalExplorer implements Explorer {
 	@Override
 	public Color getColor() {
 		return Color.blue;
+	}
+
+	private static class Action {
+		public int action;
+		public double value;
 	}
 }
