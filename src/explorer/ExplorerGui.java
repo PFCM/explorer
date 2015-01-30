@@ -7,7 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,16 +26,27 @@ public class ExplorerGui {
 	/** simulation stuff */
 	private ExplorerWorld world;
 	private List<Explorer> explorers;
+	private Map<Explorer, Integer> finished;
+	private Map<Explorer, List<int[]>> paths;
 	private int step = 0; // how far through are we?
 	private int pathLength = 0;
 
 	public ExplorerGui() {
 		// get the simulation ready
-		world = new ExplorerWorld(30,30);
+		world = new ExplorerWorld(20,20);
 		explorers = new ArrayList<>();
-		//explorers.add(new DumbExplorer(world));
+		explorers.add(new DumbExplorer(world));
 		explorers.add(new OptimalExplorer(world));
 		explorers.add(new EntropicExplorer(world));
+
+		finished = new HashMap<>();
+		paths = new HashMap<>();
+		for (Explorer e : explorers) {
+			paths.put(e, new ArrayList<int[]>());
+		}
+		for (Explorer e : explorers) {
+			paths.get(e).add(world.getState(e).clone());
+		}
 
 		// set up actual GUI stuff
 		canvas = new JPanel() { // this is a bit cheeky, especially the size bit
@@ -54,7 +67,7 @@ public class ExplorerGui {
 		frame.setVisible(true);
 
 
-		new Timer(100, new ActionListener() {
+		new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				step();
@@ -87,6 +100,7 @@ public class ExplorerGui {
 			List<Explorer> done = new ArrayList<>();
 			for (Explorer e: explorers) {
 				 world.advanceState(e.getAction(), e);
+				 paths.get(e).add(world.getState(e).clone());
 				 if (world.targetReached(e)) {
 					System.out.println("Success for " + e.toString());
 					System.out.println("in " + pathLength + " steps.");
@@ -95,9 +109,23 @@ public class ExplorerGui {
 			}
 
 			explorers.removeAll(done);
+			for (Explorer e : done) {
+				finished.put(e, pathLength);
+			}
 
-			if (explorers.isEmpty())
+			if (explorers.isEmpty()) {
 				step = 5;
+				System.out.println("~~~~~~~~~~~~~~~~~");
+				System.out.println("~~~~~~~~~~~~~~~~~");
+				System.out.println("Results: ");
+				for (Explorer e : finished.keySet()) {
+					System.out.print("\t");
+					System.out.print(e.toString());
+					System.out.print(" -- ");
+					System.out.print(finished.get(e));
+					System.out.println(" steps");
+				}
+			}
 			else
 				step = -1;
 		}
@@ -136,10 +164,26 @@ public class ExplorerGui {
 			}
 		}
 
+		// draw paths
+		for (Explorer e : paths.keySet()) {
+			g.setColor(e.getColor());
+			int[] lastp = null;
+			for (int[] p : paths.get(e)) {
+				if (lastp != null) {
+					g.drawLine(p[0]*cellSize+cellSize/2, p[1]*cellSize+cellSize/2,
+							   lastp[0]*cellSize+cellSize/2, lastp[1]*cellSize+cellSize/2);
+				}
+				lastp = p;
+			}
+		}
+
 		// draw all of our little people
 		for (Explorer e : explorers) {
 			int[] state = world.getState(e);
 			g.setColor(e.getColor());
+
+
+
 			g.fillOval(state[0]*cellSize, state[1]*cellSize, cellSize, cellSize);
 			int sx=state[0]*cellSize + cellSize/2;
 			int sy = state[1]*cellSize + cellSize/2;

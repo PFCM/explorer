@@ -82,7 +82,7 @@ public class OptimalExplorer implements Explorer {
 				astar = a;
 			}
 		}
-		System.out.println(world.actionToString(astar) + " (value: " + astarval + ")");
+		System.out.println("(OptimalExplorer) choosing sensor action: "+world.actionToString(astar) + " (value: " + astarval + ")");
 		lastSensorAction = astar;
 		return astar;
 	}
@@ -190,6 +190,8 @@ public class OptimalExplorer implements Explorer {
 	public int getAction() { // uses current beliefs -- ie. assumes they have been updated already
 		int bstar = (useFast)? getActionFaster() : getActionSlowly();
 		advanceBeliefs(bstar);
+		System.out.println("(OptimalExplorer) Choosing action: " + world.actionToString(bstar));
+		lastAction = bstar;
 		return bstar;
 	}
 	/** slightly cleverer */
@@ -226,8 +228,7 @@ public class OptimalExplorer implements Explorer {
 			}
 		}
 
-		System.out.println("(OptimalExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
-		lastAction = bstar;
+
 		return bstar;
 	}
 
