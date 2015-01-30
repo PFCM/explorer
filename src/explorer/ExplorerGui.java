@@ -30,23 +30,10 @@ public class ExplorerGui {
 	private Map<Explorer, List<int[]>> paths;
 	private int step = 0; // how far through are we?
 	private int pathLength = 0;
+	private Timer timer; // just set to 0 for repeats
 
 	public ExplorerGui() {
-		// get the simulation ready
-		world = new ExplorerWorld(30,30);
-		explorers = new ArrayList<>();
-		//explorers.add(new DumbExplorer(world));
-		explorers.add(new OptimalExplorer(world));
-		explorers.add(new EntropicExplorer(world));
 
-		finished = new HashMap<>();
-		paths = new HashMap<>();
-		for (Explorer e : explorers) {
-			paths.put(e, new ArrayList<int[]>());
-		}
-		for (Explorer e : explorers) {
-			paths.get(e).add(world.getState(e).clone());
-		}
 
 		// set up actual GUI stuff
 		canvas = new JPanel() { // this is a bit cheeky, especially the size bit
@@ -56,7 +43,7 @@ public class ExplorerGui {
 			}
 			@Override
 			public Dimension getPreferredSize() {
-				return new Dimension(500,500);
+				return new Dimension(1000,1000);
 			}
 		};
 
@@ -67,16 +54,88 @@ public class ExplorerGui {
 		frame.setVisible(true);
 
 
-		new Timer(500, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				step();
+
+		setupAndRun(100);
+	}
+
+	private void setupAndRun(int trials) {
+		List<Result> results = null;
+
+		if (trials == -1) {
+			timer = new Timer(1000, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent evt) {
+					step();
+				}
+			});
+		} else {
+			results = new ArrayList<>();
+			results.add(new Result("DumbExplorer"));
+			results.add(new Result("OptimalExplorer"));
+			results.add(new Result("EntropicExplorer"));
+		}
+		int max = (trials > 0)? trials : 1;
+		for (int i = 0; i < max; i++) {
+			// get the simulation ready
+			world = new ExplorerWorld(20,20);
+			explorers = new ArrayList<>();
+			explorers.add(new DumbExplorer(world));
+			explorers.add(new OptimalExplorer(world));
+			explorers.add(new EntropicExplorer(world));
+
+			finished = new HashMap<>();
+			paths = new HashMap<>();
+			for (Explorer e : explorers) {
+				paths.put(e, new ArrayList<int[]>());
 			}
-		}).start();
+			for (Explorer e : explorers) {
+				paths.get(e).add(world.getState(e).clone());
+			}
+
+			if (timer != null)
+				timer.start();
+			else {
+				step = 0;
+				pathLength = 0;
+
+				System.out.println("~~~~~~~~~~~~~~~~~~\n~~Start trial: "+i+"~~\n~~~~~~~~~~~~~~~~~~");
+				int cycles = 0;
+				while(step() && cycles++ < 1000);
+				// and collect results
+				for (Explorer e : finished.keySet()) {
+					int index = 0; // this is kind of gross
+					if (e instanceof OptimalExplorer)
+						index = 1;
+					else if (e instanceof EntropicExplorer)
+						index = 2;
+
+					addResult(results.get(index), finished.get(e));
+				}
+			}
+
+		}
+		if (trials > 0) {
+			for (Result r : results) {
+				System.out.println(r);
+			}
+		}
+	}
+
+	/** Adds the number to the result object */
+	private void addResult(Result r, int num) {
+		r.numTrials += 1;
+		if (Double.isNaN(r.averagePathLength))
+			r.averagePathLength = num;
+		else
+			r.averagePathLength = (r.averagePathLength + num)/2;
+		if (num > r.highestPathLength)
+			r.highestPathLength = num;
+		if (num < r.lowestPathLength)
+			r.lowestPathLength = num;
 	}
 
 	/** advance the simulation to the next stage (not necessarily a full timestep) */
-	private void step() {
+	private boolean step() {
 		if (step == 0) {
 			System.out.println("~~~~~~~~~~~~~~~~");
 			System.out.println("Getting sensor actions");
@@ -131,6 +190,7 @@ public class ExplorerGui {
 		}
 		step++;
 		canvas.repaint();
+		return step < 6;
 	}
 
 
@@ -224,6 +284,34 @@ public class ExplorerGui {
 				}
 
 
+		}
+	}
+
+	/** just to store some data */
+	private static class Result {
+		public int numTrials;
+		public double averagePathLength;
+		public int highestPathLength;
+		public int lowestPathLength;
+
+		private String name;
+
+		public Result(String n) {
+			numTrials = 0;
+			averagePathLength = Double.NaN;
+			highestPathLength = Integer.MIN_VALUE;
+			lowestPathLength = Integer.MAX_VALUE;
+
+			name = n;
+		}
+
+		@Override
+		public String toString() {
+			return    "~~~"+name+"~~~\n"
+					+ "\t" + numTrials + " trials\n"
+					+ "\t" + averagePathLength + " average path length\n"
+					+ "\t" + highestPathLength + " longest path\n"
+					+ "\t" + lowestPathLength + " shortest path\n";
 		}
 	}
 

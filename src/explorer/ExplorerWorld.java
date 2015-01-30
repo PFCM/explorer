@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.8;
+	private double observationProbability = 0.4;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
@@ -44,12 +44,14 @@ public class ExplorerWorld {
 		rand = new Random(/*0xfadeface*/System.nanoTime());
 
 		target = new int[2];
-		map = noiseMap(w,h,0.3, target);
-
+		//map = noiseMap(w,h,0.3, target);
+		map = quarteredMap(w,h,target);
 
 		state = new HashMap<>();
 
-		start = new int[]{rand.nextInt(map.length), rand.nextInt(map[0].length)};
+		//start = new int[]{rand.nextInt(map.length), rand.nextInt(map[0].length)};
+		// this time we will just choose a random corner
+		start = new int[]{rand.nextInt(2)*(map.length-1), rand.nextInt(2)*(map[0].length-1)};
 	}
 
 	/** Starts tracking state for an explorer, initially assigning it a random location */
@@ -72,6 +74,53 @@ public class ExplorerWorld {
 			for (int j = 0; j < h; j++) {
 				if (rand.nextDouble() < prob)
 					map[i][j] = FULL;
+			}
+
+		// finally the target
+		target[0] = w/2;//rand.nextInt(w);
+		target[1] = h/2;//rand.nextInt(h);
+		map[target[0]][target[1]] = TARGET;
+
+		return map;
+	}
+
+	/** Makes a map with four distinct patterns, one per quarter */
+	private int[][] quarteredMap(int w, int h, int[] target) {
+		int[][] map = new int[w][h];
+
+		// top left gets vertical bands
+		for (int x = 0; x <= w/2; x++)
+			for (int y = 0; y < h/2; y++) {
+				if (x % 2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
+			}
+
+		// top right gets horizontal
+		for (int x = w/2+1; x < w; x++)
+			for (int y = 0; y < h/2; y++) {
+				if (y % 2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
+			}
+		// bottom left gets a checkerboard
+		for (int x = 0; x <= w/2; x++)
+			for (int y = h/2; y < h; y++) {
+				if ((y+x)%2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
+			}
+
+		// bottom right gets something else
+		for (int x = w/2+1; x < w; x++)
+			for (int y = h/2; y < h; y++) {
+				if ((y/x)%2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
 			}
 
 		// finally the target
