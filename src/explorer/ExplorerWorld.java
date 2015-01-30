@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.999999;
+	private double observationProbability = 0.8;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
@@ -44,7 +44,7 @@ public class ExplorerWorld {
 		rand = new Random(/*0xfadeface*/System.nanoTime());
 
 		target = new int[2];
-		map = noiseMap(w,h,0.5, target);
+		map = noiseMap(w,h,0.3, target);
 
 
 		state = new HashMap<>();
@@ -75,8 +75,8 @@ public class ExplorerWorld {
 			}
 
 		// finally the target
-		target[0] = rand.nextInt(w);
-		target[1] = rand.nextInt(h);
+		target[0] = w/2;//rand.nextInt(w);
+		target[1] = h/2;//rand.nextInt(h);
 		map[target[0]][target[1]] = TARGET;
 
 		return map;

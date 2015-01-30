@@ -317,7 +317,7 @@ public class OptimalExplorer implements Explorer {
 
 	@Override
 	public Color getColor() {
-		return Color.blue;
+		return new Color(0.0f,0.0f,1.0f, 0.5f);
 	}
 
 	private static class Action {

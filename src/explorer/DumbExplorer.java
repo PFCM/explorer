@@ -144,6 +144,6 @@ public class DumbExplorer implements Explorer {
 
 	@Override
 	public Color getColor() {
-		return Color.pink;
+		return new Color(1.0f,0.5f,0.5f,0.5f);
 	}
 }

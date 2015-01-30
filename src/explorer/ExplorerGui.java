@@ -33,9 +33,9 @@ public class ExplorerGui {
 
 	public ExplorerGui() {
 		// get the simulation ready
-		world = new ExplorerWorld(20,20);
+		world = new ExplorerWorld(30,30);
 		explorers = new ArrayList<>();
-		explorers.add(new DumbExplorer(world));
+		//explorers.add(new DumbExplorer(world));
 		explorers.add(new OptimalExplorer(world));
 		explorers.add(new EntropicExplorer(world));
 
@@ -203,7 +203,7 @@ public class ExplorerGui {
 			default:
 				break;
 			}
-			g.setColor(Color.black);
+			g.setColor(Color.white);
 			g.drawLine(sx, sy, state[0]*cellSize+cellSize/2, state[1]*cellSize+cellSize/2);
 		}
 

@@ -188,7 +188,7 @@ public class EntropicExplorer implements Explorer {
 
 	@Override
 	public Color getColor() {
-		return new Color(1.0f,0.0f,1.0f);
+		return new Color(1.0f,0.0f,1.0f,0.5f);
 	}
 
 	/** takes a set of beliefs and returns the shannon entropy (log base 2) */
