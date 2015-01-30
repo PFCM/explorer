@@ -55,7 +55,7 @@ public class ExplorerGui {
 
 
 
-		setupAndRun(100);
+		setupAndRun(-1);
 	}
 
 	private void setupAndRun(int trials) {
@@ -73,15 +73,17 @@ public class ExplorerGui {
 			results.add(new Result("DumbExplorer"));
 			results.add(new Result("OptimalExplorer"));
 			results.add(new Result("EntropicExplorer"));
+			results.add(new Result("SurpriseExplorer"));
 		}
 		int max = (trials > 0)? trials : 1;
 		for (int i = 0; i < max; i++) {
 			// get the simulation ready
 			world = new ExplorerWorld(20,20);
 			explorers = new ArrayList<>();
-			explorers.add(new DumbExplorer(world));
-			explorers.add(new OptimalExplorer(world));
-			explorers.add(new EntropicExplorer(world));
+			//explorers.add(new DumbExplorer(world));
+			//explorers.add(new OptimalExplorer(world));
+			//explorers.add(new EntropicExplorer(world));
+			explorers.add(new SurpriseExplorer(world));
 
 			finished = new HashMap<>();
 			paths = new HashMap<>();
@@ -108,6 +110,8 @@ public class ExplorerGui {
 						index = 1;
 					else if (e instanceof EntropicExplorer)
 						index = 2;
+					else if (e instanceof SurpriseExplorer)
+						index = 3;
 
 					addResult(results.get(index), finished.get(e));
 				}
