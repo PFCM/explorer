@@ -135,6 +135,7 @@ public class SurpriseExplorer implements Explorer {
 		}
 
 		System.out.println("(SurpriseExplorer) Choosing action: " + world.actionToString(astar) + " (expected surprise " + astarval + ")");
+		lastSensorAction = astar;
 		return astar;
 	}
 
@@ -192,7 +193,12 @@ public class SurpriseExplorer implements Explorer {
 
 	@Override
 	public Color getColor() {
-		return new Color(0.0f,0.5f,1.0f,0.5f);
+		return new Color(1.0f,1.0f,0.0f,0.5f);
+	}
+
+	@Override
+	public String toString() {
+		return "SurpriseExplorer";
 	}
 
 }

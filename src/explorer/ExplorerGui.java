@@ -55,14 +55,14 @@ public class ExplorerGui {
 
 
 
-		setupAndRun(-1);
+		setupAndRun(1000);
 	}
 
 	private void setupAndRun(int trials) {
 		List<Result> results = null;
 
 		if (trials == -1) {
-			timer = new Timer(1000, new ActionListener() {
+			timer = new Timer(500, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					step();
@@ -78,11 +78,11 @@ public class ExplorerGui {
 		int max = (trials > 0)? trials : 1;
 		for (int i = 0; i < max; i++) {
 			// get the simulation ready
-			world = new ExplorerWorld(20,20);
+			world = new ExplorerWorld(10,10);
 			explorers = new ArrayList<>();
-			//explorers.add(new DumbExplorer(world));
-			//explorers.add(new OptimalExplorer(world));
-			//explorers.add(new EntropicExplorer(world));
+			explorers.add(new DumbExplorer(world));
+			explorers.add(new OptimalExplorer(world));
+			explorers.add(new EntropicExplorer(world));
 			explorers.add(new SurpriseExplorer(world));
 
 			finished = new HashMap<>();

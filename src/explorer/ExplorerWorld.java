@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.4;
+	private double observationProbability = 0.6;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
@@ -45,7 +45,8 @@ public class ExplorerWorld {
 
 		target = new int[2];
 		//map = noiseMap(w,h,0.3, target);
-		map = quarteredMap(w,h,target);
+		//map = quarteredMap(w,h,target);
+		map = halvedMap(w,h,target);
 
 		state = new HashMap<>();
 
@@ -118,6 +119,36 @@ public class ExplorerWorld {
 		for (int x = w/2+1; x < w; x++)
 			for (int y = h/2; y < h; y++) {
 				if ((y/x)%2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
+			}
+
+		// finally the target
+		target[0] = w/2;//rand.nextInt(w);
+		target[1] = h/2;//rand.nextInt(h);
+		map[target[0]][target[1]] = TARGET;
+
+		return map;
+	}
+
+	/** makes a map with two different patterns */
+	private int[][] halvedMap(int w, int h, int[] target) {
+		int[][] map = new int[w][h];
+
+		// top gets vertical bands
+		for (int x = 0; x < w; x++)
+			for (int y = 0; y < h/2; y++) {
+				if (x % 2 == 0)
+					map[x][y] = FULL;
+				else
+					map[x][y] = EMPTY;
+			}
+
+		// bottom gets horizontal
+		for (int x = 0; x < w; x++)
+			for (int y = h/2; y < h; y++) {
+				if (y % 2 == 0)
 					map[x][y] = FULL;
 				else
 					map[x][y] = EMPTY;
