@@ -99,7 +99,8 @@ public class SurpriseExplorer implements Explorer {
 		// sum over all possible states
 		for (int x = 0; x < a.length; x++) {
 			for (int y = 0; y < a[0].length; y++) {
-				sum += a[x][y] * Math.log(a[x][y]/b[x][y]);
+				if (a[x][y] != 0 && b[x][y] != 0)
+					sum += a[x][y] * Math.log(a[x][y]/b[x][y]);
 			}
 		}
 		return sum;
