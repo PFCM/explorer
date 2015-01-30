@@ -109,7 +109,7 @@ public class EntropicExplorer implements Explorer {
 			}
 		}
 
-		System.out.println("(EntropiExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
+		System.out.println("(EntropicExplorer) Choosing action: " + world.actionToString(bstar) + " (value = " + bstarval + ")");
 		lastAction = bstar;
 		advanceBeliefs(bstar);
 		return bstar;
