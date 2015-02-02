@@ -54,15 +54,15 @@ public class ExplorerGui {
 		frame.setVisible(true);
 
 
-
-		setupAndRun(1000);
+		// -1 to just watch a single trial
+		setupAndRun(100);
 	}
 
 	private void setupAndRun(int trials) {
 		List<Result> results = null;
 
 		if (trials == -1) {
-			timer = new Timer(500, new ActionListener() {
+			timer = new Timer(00, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					step();
@@ -74,11 +74,12 @@ public class ExplorerGui {
 			results.add(new Result("OptimalExplorer"));
 			results.add(new Result("EntropicExplorer"));
 			results.add(new Result("SurpriseExplorer"));
+
 		}
 		int max = (trials > 0)? trials : 1;
 		for (int i = 0; i < max; i++) {
 			// get the simulation ready
-			world = new ExplorerWorld(10,10);
+			world = new ExplorerWorld(50,50);
 			explorers = new ArrayList<>();
 			explorers.add(new DumbExplorer(world));
 			explorers.add(new OptimalExplorer(world));
@@ -102,7 +103,7 @@ public class ExplorerGui {
 
 				System.out.println("~~~~~~~~~~~~~~~~~~\n~~Start trial: "+i+"~~\n~~~~~~~~~~~~~~~~~~");
 				int cycles = 0;
-				while(step() && cycles++ < 1000);
+				while(step() && cycles++ < 300);
 				// and collect results
 				for (Explorer e : finished.keySet()) {
 					int index = 0; // this is kind of gross
