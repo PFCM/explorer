@@ -55,14 +55,14 @@ public class ExplorerGui {
 
 
 		// -1 to just watch a single trial
-		setupAndRun(100);
+		setupAndRun(-1);
 	}
 
 	private void setupAndRun(int trials) {
 		List<Result> results = null;
 
 		if (trials == -1) {
-			timer = new Timer(00, new ActionListener() {
+			timer = new Timer(1500, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					step();
@@ -74,17 +74,19 @@ public class ExplorerGui {
 			results.add(new Result("OptimalExplorer"));
 			results.add(new Result("EntropicExplorer"));
 			results.add(new Result("SurpriseExplorer"));
+			results.add(new Result("RandomExplorer"));
 
 		}
 		int max = (trials > 0)? trials : 1;
 		for (int i = 0; i < max; i++) {
 			// get the simulation ready
-			world = new ExplorerWorld(50,50);
+			world = new ExplorerWorld(15,15);
 			explorers = new ArrayList<>();
-			explorers.add(new DumbExplorer(world));
-			explorers.add(new OptimalExplorer(world));
-			explorers.add(new EntropicExplorer(world));
-			explorers.add(new SurpriseExplorer(world));
+			//explorers.add(new DumbExplorer(world));
+			//explorers.add(new OptimalExplorer(world));
+			//explorers.add(new EntropicExplorer(world));
+			//explorers.add(new SurpriseExplorer(world));
+			explorers.add(new RandomExplorer(world));
 
 			finished = new HashMap<>();
 			paths = new HashMap<>();
@@ -103,7 +105,7 @@ public class ExplorerGui {
 
 				System.out.println("~~~~~~~~~~~~~~~~~~\n~~Start trial: "+i+"~~\n~~~~~~~~~~~~~~~~~~");
 				int cycles = 0;
-				while(step() && cycles++ < 300);
+				while(step() && cycles++ < 1000);
 				// and collect results
 				for (Explorer e : finished.keySet()) {
 					int index = 0; // this is kind of gross
@@ -113,6 +115,8 @@ public class ExplorerGui {
 						index = 2;
 					else if (e instanceof SurpriseExplorer)
 						index = 3;
+					else if (e instanceof RandomExplorer)
+						index = 4;
 
 					addResult(results.get(index), finished.get(e));
 				}

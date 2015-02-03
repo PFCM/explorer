@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.99999999999999;
+	private double observationProbability = 0.99999999999;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
@@ -44,17 +44,17 @@ public class ExplorerWorld {
 		rand = new Random(/*0xfadefacc*/System.nanoTime());
 
 		target = new int[2];
-		map = noiseMap(w,h,0.1, target);
-		//map = quarteredMap(w,h,target);
+		//map = noiseMap(w,h,0.1, target);
+		map = quarteredMap(w,h,target);
 		//map = halvedMap(w,h,target);
 
 		state = new HashMap<>();
 
 		//start = new int[]{rand.nextInt(map.length), rand.nextInt(map[0].length)};
 		// this time we will just choose a random corner
-		//start = new int[]{rand.nextInt(2)*(map.length-1), rand.nextInt(2)*(map[0].length-1)};
+		start = new int[]{rand.nextInt(2)*(map.length-1), rand.nextInt(2)*(map[0].length-1)};
 		// want to see what would happen if we just put it in the middle at the bottom on the halves map
-		start = new int[]{0, h/2-1};
+		//start = new int[]{0, h/2};
 	}
 
 	/** Starts tracking state for an explorer, initially assigning it a random location */
@@ -80,7 +80,7 @@ public class ExplorerWorld {
 			}
 
 		// finally the target
-		target[0] = w/2+1;//rand.nextInt(w);
+		target[0] = w/2;//rand.nextInt(w);
 		target[1] = h/2;//rand.nextInt(h);
 		map[target[0]][target[1]] = TARGET;
 

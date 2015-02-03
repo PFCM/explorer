@@ -47,18 +47,18 @@ public class EntropicExplorer implements Explorer {
 
 	@Override
 	public int getSensorAction() {
-		// we are going to have to find the argmax across sensor actions
+		// we are going to have to find the argmin of the expected entropy across sensor actions
 		int astar = -1;
-		double astarval = Double.NEGATIVE_INFINITY;
+		double astarval = Double.POSITIVE_INFINITY;
 		for (int a : sensorActions) {
 			// sum across possible observations
 			double ysum = 0;
 			for (int y : observations) {
-				// of the reduction in entropy by having made this observation
+				// of the entropy
 				double newEntropy = entropy(updateBeliefs(a,y));
 				if (Double.isNaN(newEntropy))
 					newEntropy = currentEntropy;
-				double entropyReduction = currentEntropy - newEntropy;
+				//double entropyReduction = currentEntropy - newEntropy;
 				// weighted by the probability
 				// which is the sum across all possible states of our belief in that state times the probability of getting the observation in that state
 				double xsum = 0;
@@ -66,10 +66,10 @@ public class EntropicExplorer implements Explorer {
 					for (int ay = 0; ay < beliefs.length; ay++) {
 						xsum += beliefs[ax][ay] * world.observationProbability(y, a, ax, ay);
 					}
-				ysum += xsum * entropyReduction;
+				ysum += xsum * newEntropy;
 			}
 			System.out.println("(EntropicExplorer)    " + world.actionToString(a) + " : " + ysum);
-			if (ysum > astarval) {
+			if (ysum < astarval) {
 				astarval = ysum;
 				astar = a;
 			}
