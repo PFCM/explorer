@@ -83,10 +83,10 @@ public class ExplorerGui {
 			world = new ExplorerWorld(15,15);
 			explorers = new ArrayList<>();
 			//explorers.add(new DumbExplorer(world));
-			//explorers.add(new OptimalExplorer(world));
+			explorers.add(new OptimalExplorer(world));
 			//explorers.add(new EntropicExplorer(world));
 			//explorers.add(new SurpriseExplorer(world));
-			explorers.add(new RandomExplorer(world));
+			//explorers.add(new RandomExplorer(world));
 
 			finished = new HashMap<>();
 			paths = new HashMap<>();

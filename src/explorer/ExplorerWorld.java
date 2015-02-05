@@ -20,7 +20,7 @@ public class ExplorerWorld {
 	/** Goal! */
 	public static final int TARGET = 2;
 	/** the probability of making a correct observation. Each possible incorrect observation has a (1-observationProb)/2 chance. */
-	private double observationProbability = 0.99999999999;
+	private double observationProbability = 0.0000000001;
 
 	/** Directions: these are the possible actions for both camera and agent */
 	public static final int NORTH = 0;
