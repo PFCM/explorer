@@ -84,7 +84,7 @@ public class RandomExplorer implements Explorer {
 	@Override
 	public void observe(int y) {
 		System.out.println("(RandomExplorer) Observing: " + y);
-		beliefs = updateBeliefs(lastAction, y);
+		beliefs = updateBeliefs(lastSensorAction, y);
 	}
 
 	/** Returns the advanced beliefs given a sensor action and an observation. Does not overwrite existing beliefs

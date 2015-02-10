@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ExplorerGui {
 	private int step = 0; // how far through are we?
 	private int pathLength = 0;
 	private Timer timer; // just set to 0 for repeats
+	List<Result> results;
 
 	public ExplorerGui() {
 
@@ -55,14 +57,29 @@ public class ExplorerGui {
 
 
 		// -1 to just watch a single trial
-		setupAndRun(-1);
+		try {
+			Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("results"), "utf-8"));
+
+			for (double mapProb = 0.01; mapProb < 1; mapProb += 0.01) {
+				setupAndRun(500, mapProb);
+				w.write(Double.toString(mapProb));
+				for (Result r : results) {
+					w.write(" " + r.averagePathLength);
+				}
+				w.write("\n");
+			}
+
+			w.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	private void setupAndRun(int trials) {
-		List<Result> results = null;
+	private void setupAndRun(int trials, double mapProb) {
 
 		if (trials == -1) {
-			timer = new Timer(1500, new ActionListener() {
+			timer = new Timer(100, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					step();
@@ -80,13 +97,13 @@ public class ExplorerGui {
 		int max = (trials > 0)? trials : 1;
 		for (int i = 0; i < max; i++) {
 			// get the simulation ready
-			world = new ExplorerWorld(15,15);
+			world = new ExplorerWorld(7,7, mapProb);
 			explorers = new ArrayList<>();
-			//explorers.add(new DumbExplorer(world));
+			explorers.add(new DumbExplorer(world));
 			explorers.add(new OptimalExplorer(world));
-			//explorers.add(new EntropicExplorer(world));
-			//explorers.add(new SurpriseExplorer(world));
-			//explorers.add(new RandomExplorer(world));
+			explorers.add(new EntropicExplorer(world));
+			explorers.add(new SurpriseExplorer(world));
+			explorers.add(new RandomExplorer(world));
 
 			finished = new HashMap<>();
 			paths = new HashMap<>();
@@ -105,7 +122,7 @@ public class ExplorerGui {
 
 				System.out.println("~~~~~~~~~~~~~~~~~~\n~~Start trial: "+i+"~~\n~~~~~~~~~~~~~~~~~~");
 				int cycles = 0;
-				while(step() && cycles++ < 1000);
+				while(step() && cycles++ < 100);
 				// and collect results
 				for (Explorer e : finished.keySet()) {
 					int index = 0; // this is kind of gross
