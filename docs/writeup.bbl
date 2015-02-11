@@ -1,0 +1,289 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 1.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{bajcsy1988active}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Bajcsy}{B.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{computer vision;2-D segmentation;3-D shape parameterization;active
+  vision;global models;local models;obtaining range;optical distortions;overall
+  performance;stereo convergence;Band pass filters;Eyes;Feedback;Focusing;Image
+  segmentation;Lenses;Optical distortion;Optical losses;Predictive
+  models;Shape;Spatial resolution}
+  \strng{namehash}{BR1}
+  \strng{fullhash}{BR1}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1109/5.5968
+  \endverb
+  \field{issn}{0018-9219}
+  \field{number}{8}
+  \field{pages}{966\bibrangedash 1005}
+  \field{title}{Active perception}
+  \field{volume}{76}
+  \field{journaltitle}{Proceedings of the IEEE}
+  \field{year}{1988}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{baldi2010bits}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Baldi}{B.}%
+     {Pierre}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Itti}{I.}%
+     {Laurent}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier}%
+  }
+  \strng{namehash}{BPIL1}
+  \strng{fullhash}{BPIL1}
+  \field{sortinit}{B}
+  \field{number}{5}
+  \field{pages}{649\bibrangedash 666}
+  \field{title}{Of bits and wows: a Bayesian theory of surprise with
+  applications to attention}
+  \field{volume}{23}
+  \field{journaltitle}{Neural Networks}
+  \field{year}{2010}
+\endentry
+
+\entry{davison20013d}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Davison}{D.}%
+     {A.J.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kita}{K.}%
+     {N.}{N.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{accelerometers;active vision;cartography;mobile robots;real-time
+  systems;robot vision;stereo image processing;3D simultaneous
+  localisation;active vision;automatic implementation;fixating stereo
+  vision;map-building;mobile robots;natural features;odometry;real-time
+  EKF-based-SLAM system;real-world applications;roll/pitch accelerometer
+  sensor;simultaneous localisation and map-building;sparse map;unconstrained 3D
+  localisation;undulating course;undulating terrain;unknown slope
+  variations;visual measurement;visual point features;wheeled robot
+  motion;Accelerometers;Computer vision;Intelligent systems;Mobile robots;Real
+  time systems;Robot sensing systems;Robot vision systems;Robotics and
+  automation;Simultaneous localization and mapping;Stereo vision}
+  \strng{namehash}{DAKN1}
+  \strng{fullhash}{DAKN1}
+  \field{sortinit}{D}
+  \field{booktitle}{Computer Vision and Pattern Recognition, 2001. CVPR 2001.
+  Proceedings of the 2001 IEEE Computer Society Conference on}
+  \verb{doi}
+  \verb 10.1109/CVPR.2001.990501
+  \endverb
+  \field{issn}{1063-6919}
+  \field{pages}{I\bibrangedash 384\bibrangedash I\bibrangedash 391 vol.1}
+  \field{title}{3D simultaneous localisation and map-building using active
+  vision for a robot moving on undulating terrain}
+  \field{volume}{1}
+  \field{year}{2001}
+\endentry
+
+\entry{davison2002simultaneous}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Davison}{D.}%
+     {A.J.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Murray}{M.}%
+     {D.W.}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{active vision;computerised navigation;mobile robots;robot vision;stereo
+  image processing;SLAM;active vision;automatic map-maintenance;goal-directed
+  steering;high-performance stereo head;localization;map-building;real-time
+  experiments;uncertainty-based measurement selection;Cameras;Head;Image
+  reconstruction;Measurement uncertainty;Mobile robots;Robot kinematics;Robot
+  sensing systems;Robot vision systems;Simultaneous localization and
+  mapping;Sonar navigation}
+  \strng{namehash}{DAMD1}
+  \strng{fullhash}{DAMD1}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1109/TPAMI.2002.1017615
+  \endverb
+  \field{issn}{0162-8828}
+  \field{number}{7}
+  \field{pages}{865\bibrangedash 880}
+  \field{title}{Simultaneous localization and map-building using active vision}
+  \field{volume}{24}
+  \field{journaltitle}{Pattern Analysis and Machine Intelligence, IEEE
+  Transactions on}
+  \field{year}{2002}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{itti2005bayesian}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Itti}{I.}%
+     {Laurent}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Baldi}{B.}%
+     {Pierre~F}{P.~F.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{ILBPF1}
+  \strng{fullhash}{ILBPF1}
+  \field{sortinit}{I}
+  \field{booktitle}{Advances in neural information processing systems}
+  \field{pages}{547\bibrangedash 554}
+  \field{title}{Bayesian surprise attracts human attention}
+  \field{year}{2005}
+\endentry
+
+\entry{itti1998salience}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Itti}{I.}%
+     {Laurent}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Koch}{K.}%
+     {Christof}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Niebur}{N.}%
+     {Ernst}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE Computer Society}%
+  }
+  \strng{namehash}{ILKCNE1}
+  \strng{fullhash}{ILKCNE1}
+  \field{sortinit}{I}
+  \verb{doi}
+  \verb http://doi.ieeecomputersociety.org/10.1109/34.730558
+  \endverb
+  \field{issn}{0162-8828}
+  \field{number}{11}
+  \field{pages}{1254\bibrangedash 1259}
+  \field{title}{A Model of Saliency-Based Visual Attention for Rapid Scene
+  Analysis}
+  \field{volume}{20}
+  \list{location}{1}{%
+    {Los Alamitos, CA, USA}%
+  }
+  \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}
+  \field{year}{1998}
+\endentry
+
+\entry{parkhurst2002modeling}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Parkhurst}{P.}%
+     {Derrick}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Law}{L.}%
+     {Klinton}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Niebur}{N.}%
+     {Ernst}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Eye movements}
+  \strng{namehash}{PDLKNE1}
+  \strng{fullhash}{PDLKNE1}
+  \field{sortinit}{P}
+  \verb{doi}
+  \verb http://dx.doi.org/10.1016/S0042-6989(01)00250-4
+  \endverb
+  \field{issn}{0042-6989}
+  \field{number}{1}
+  \field{pages}{107 \bibrangedash  123}
+  \field{title}{Modeling the role of salience in the allocation of overt visual
+  attention}
+  \verb{url}
+  \verb http://www.sciencedirect.com/science/article/pii/S0042698901002504
+  \endverb
+  \field{volume}{42}
+  \field{journaltitle}{Vision Research}
+  \field{year}{2002}
+\endentry
+
+\entry{wolfe1994guided}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wolfe}{W.}%
+     {JeremyM.}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {English}%
+  }
+  \list{publisher}{1}{%
+    {Springer-Verlag}%
+  }
+  \strng{namehash}{WJ1}
+  \strng{fullhash}{WJ1}
+  \field{sortinit}{W}
+  \verb{doi}
+  \verb 10.3758/BF03200774
+  \endverb
+  \field{issn}{1069-9384}
+  \field{number}{2}
+  \field{pages}{202\bibrangedash 238}
+  \field{title}{Guided Search 2.0 A revised model of visual search}
+  \verb{url}
+  \verb http://dx.doi.org/10.3758/BF03200774
+  \endverb
+  \field{volume}{1}
+  \field{journaltitle}{Psychonomic Bulletin \& Review}
+  \field{year}{1994}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
