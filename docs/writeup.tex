@@ -21,6 +21,13 @@
 
 \begin{document}
 \section{Abstract}
+We present a simple, active-vision inspired scenario to test general approaches to 
+problems in a Markovian world where there is a choice to be made about the observation.
+Three approaches -- minimising entropy, maximising information gained and maximising
+expected future reward -- were tested. These were compared to each other and to two
+choiceless approaches. Results show a slight preference for the maximised expected future
+reward, although all the considered approaches performed comparably.
+
 \section{Introduction}
 What to observe is a choice that almost all living beings make constantly. Most creatures
 have evolved significant flexibility in sensory apparatus which brings with it a great 
@@ -43,21 +50,27 @@ heads, or at least mobile cameras. This kind of a system seems ideal, as it prov
 clear choices to shape the stream of incoming data. Despite this very little work
 addresses the question of where to look in an abstract way, instead tending to code in 
 desired behaviours by hand. Often this results in fixating on features particularly for 
-simultaneous localisation and mapping \autocite{davison2002simultaneous, davison20013d}
+simultaneous localisation and mapping. \autocite{davison2002simultaneous, davison20013d}
+Other examples involve panning and zooming cameras \autocite{minut2001reinforcement}
 
-A concept that seems related is the idea of salience in the context of image processing
-and neuroscience.
-The idea is to reproduce the eye movements of primates as a metric for which parts of
-a scene are `interesting' in some way. Often a neuronal model can be applied after 
-various steps of processing the input image. \autocite{itti1998salience} 
-These kinds of models do seem to produce results similar to that of humans 
-\autocite{parkhurst2002modeling} but the usefulness of these approaches appears to 
-rest on the assumption that humans make good choices.
+A related concept is the idea of \emph{salience} which arises in the context of image
+ processing and neuroscience.
+Primarily founded on the eye movements of primates, salience seeks to provide some 
+measure of which parts of a scene are `interesting' or important to the observer in some
+ way. Often a neural focus is taken, mimicking the mechanism of much primate
+ visual processing. A classic example is the system presented by Itti and Koch which 
+ calculates several feature maps at a number of scales and combines them to form a
+ `salience map' which incodes the interestingness on a per-pixel basis.
+  \autocite{itti1998salience} 
+These kinds of models do seem to produce results similar to that of humans and have found 
+numerous applications and refinements.
+\autocite{parkhurst2002modeling} .
 
 Something that arises from the salience literature is a split between `bottom up' and 
 `top down' salience. The bottom-up components are the raw features which stand out
-from the rest while the top down component is how the attention paid to these features 
-is modulated by specific goals. \autocite{wolfe1994guided}
+from the rest (essentially the aforementioned salience map) while the top down component
+ tries to capture how specific goals change the relevance of certain features.
+ \autocite{wolfe1994guided}
 
 \section{Experimental Setup}
 The goal of the experiments was to construct a simulation which captured some of the more

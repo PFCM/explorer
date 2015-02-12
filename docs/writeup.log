@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.76.0-2014112700 (rev 4630)  (format=lualatex 2014.11.27)  11 FEB 2015 09:27
+This is LuaTeX, Version beta-0.76.0-2014112700 (rev 4630)  (format=lualatex 2014.11.27)  12 FEB 2015 14:52
  restricted \write18 enabled.
 **writeup.tex
 (./writeup.tex
@@ -797,6 +797,11 @@ Package biblatex Warning: BibTeX reported the following issues
 (biblatex)                with 'davison2002simultaneous':
 (biblatex)                - Invalid format of field 'month'.
 
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'minut2001reinforcement':
+(biblatex)                - Can't use 'location' + 'address'.
+
 )
 Package biblatex Info: Reference section=0 on input line 22.
 Package biblatex Info: Reference segment=0 on input line 22.
@@ -859,7 +864,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 70.
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
 
 (/usr/pkg/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -867,7 +872,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/pkg/share/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 70.
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
 
 (/usr/pkg/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -877,84 +882,84 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<./figures/quartermap.png, id=19, 716.97565pt x 716.97565pt>
+<./figures/quartermap.png, id=16, 716.97565pt x 716.97565pt>
 File: ./figures/quartermap.png Graphic file (type png)
 
 <use ./figures/quartermap.png>
-Package pdftex.def Info: ./figures/quartermap.png used on input line 130.
+Package pdftex.def Info: ./figures/quartermap.png used on input line 143.
 (pdftex.def)             Requested size: 443.86319pt x 443.86389pt.
 
-<./figures/randommap01.png, id=20, 712.68237pt x 712.68237pt>
+<./figures/randommap01.png, id=17, 712.68237pt x 712.68237pt>
 File: ./figures/randommap01.png Graphic file (type png)
 
 <use ./figures/randommap01.png>
-Package pdftex.def Info: ./figures/randommap01.png used on input line 153.
+Package pdftex.def Info: ./figures/randommap01.png used on input line 166.
 (pdftex.def)             Requested size: 72.26999pt x 72.262pt.
 
-<./figures/randommap02.png, id=21, 712.68237pt x 712.68237pt>
+<./figures/randommap02.png, id=18, 712.68237pt x 712.68237pt>
 File: ./figures/randommap02.png Graphic file (type png)
 
 <use ./figures/randommap02.png>
-Package pdftex.def Info: ./figures/randommap02.png used on input line 157.
+Package pdftex.def Info: ./figures/randommap02.png used on input line 170.
 (pdftex.def)             Requested size: 72.26999pt x 72.262pt.
 
-<./figures/randommap03.png, id=22, 712.68237pt x 712.68237pt>
+<./figures/randommap03.png, id=19, 712.68237pt x 712.68237pt>
 File: ./figures/randommap03.png Graphic file (type png)
 
 <use ./figures/randommap03.png>
-Package pdftex.def Info: ./figures/randommap03.png used on input line 161.
+Package pdftex.def Info: ./figures/randommap03.png used on input line 174.
 (pdftex.def)             Requested size: 72.26999pt x 72.262pt.
 
-<./figures/randommap04.png, id=23, 712.68237pt x 712.68237pt>
+<./figures/randommap04.png, id=20, 712.68237pt x 712.68237pt>
 File: ./figures/randommap04.png Graphic file (type png)
 
 <use ./figures/randommap04.png>
-Package pdftex.def Info: ./figures/randommap04.png used on input line 165.
+Package pdftex.def Info: ./figures/randommap04.png used on input line 178.
 (pdftex.def)             Requested size: 72.26999pt x 72.262pt.
 
-<./figures/randommap05.png, id=24, 712.68237pt x 712.68237pt>
+<./figures/randommap05.png, id=21, 712.68237pt x 712.68237pt>
 File: ./figures/randommap05.png Graphic file (type png)
 
 <use ./figures/randommap05.png>
-Package pdftex.def Info: ./figures/randommap05.png used on input line 169.
+Package pdftex.def Info: ./figures/randommap05.png used on input line 182.
 (pdftex.def)             Requested size: 72.26999pt x 72.262pt.
 
-<./figures/randommap06.png, id=25, 712.68237pt x 711.96683pt>
+<./figures/randommap06.png, id=22, 712.68237pt x 711.96683pt>
 File: ./figures/randommap06.png Graphic file (type png)
 
 <use ./figures/randommap06.png>
-Package pdftex.def Info: ./figures/randommap06.png used on input line 173.
+Package pdftex.def Info: ./figures/randommap06.png used on input line 186.
 (pdftex.def)             Requested size: 72.26999pt x 72.18945pt.
 
-<./figures/randommap07.png, id=26, 712.68237pt x 711.96683pt>
+<./figures/randommap07.png, id=23, 712.68237pt x 711.96683pt>
 File: ./figures/randommap07.png Graphic file (type png)
 
 <use ./figures/randommap07.png>
-Package pdftex.def Info: ./figures/randommap07.png used on input line 177.
+Package pdftex.def Info: ./figures/randommap07.png used on input line 190.
 (pdftex.def)             Requested size: 72.26999pt x 72.18945pt.
 
-<./figures/randommap08.png, id=27, 712.68237pt x 711.96683pt>
+<./figures/randommap08.png, id=24, 712.68237pt x 711.96683pt>
 File: ./figures/randommap08.png Graphic file (type png)
 
 <use ./figures/randommap08.png>
-Package pdftex.def Info: ./figures/randommap08.png used on input line 181.
+Package pdftex.def Info: ./figures/randommap08.png used on input line 194.
 (pdftex.def)             Requested size: 72.26999pt x 72.18945pt.
 
-<./figures/randommap09.png, id=28, 712.68237pt x 711.96683pt>
+<./figures/randommap09.png, id=25, 712.68237pt x 711.96683pt>
 File: ./figures/randommap09.png Graphic file (type png)
 
 <use ./figures/randommap09.png>
-Package pdftex.def Info: ./figures/randommap09.png used on input line 185.
+Package pdftex.def Info: ./figures/randommap09.png used on input line 198.
 (pdftex.def)             Requested size: 72.26999pt x 72.18945pt.
  [2] [3 <./figures/quartermap.png>] [4 <./figures/randommap01.png> <./figures/ra
 ndommap02.png> <./figures/randommap03.png> <./figures/randommap04.png> <./figure
 s/randommap05.png> <./figures/randommap06.png> <./figures/randommap07.png> <./fi
 gures/randommap08.png> <./figures/randommap09.png>]
-Overfull \hbox (4.44867pt too wide) in paragraph at lines 257--257
+Overfull \hbox (4.44867pt too wide) in paragraph at lines 270--270
  [][][][][]$\OML/cmm/m/it/10 x[]$ 
  []
 
-(./plots/obsprob.tex
+[5] (./plots/obsprob.tex
 Package epstopdf Info: Source file: <./plots/obsprob.eps>
 (epstopdf)                    date: 2015-02-06 12:29:17
 (epstopdf)                    size: 17281 bytes
@@ -966,7 +971,7 @@ ed-to.pdf ./plots/obsprob.eps>
 (epstopdf)             \includegraphics on input line 104.
 Package epstopdf Info: Output file is already uptodate.
 
-<./plots/obsprob-eps-converted-to.pdf, id=42, 361.35pt x 252.945pt>
+<./plots/obsprob-eps-converted-to.pdf, id=47, 361.35pt x 252.945pt>
 File: ./plots/obsprob-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./plots/obsprob-eps-converted-to.pdf>
@@ -985,14 +990,14 @@ erted-to.pdf ./plots/obsplotmag.eps>
 (epstopdf)             \includegraphics on input line 105.
 Package epstopdf Info: Output file is already uptodate.
 
-<./plots/obsplotmag-eps-converted-to.pdf, id=43, 361.35pt x 252.945pt>
+<./plots/obsplotmag-eps-converted-to.pdf, id=48, 361.35pt x 252.945pt>
 File: ./plots/obsplotmag-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./plots/obsplotmag-eps-converted-to.pdf>
 Package pdftex.def Info: ./plots/obsplotmag-eps-converted-to.pdf used on input l
 ine 105.
 (pdftex.def)             Requested size: 361.34912pt x 252.94438pt.
-) [5] (./plots/randommapsmall.tex
+) (./plots/randommapsmall.tex
 Package epstopdf Info: Source file: <./plots/randommapsmall.eps>
 (epstopdf)                    date: 2015-02-10 10:52:17
 (epstopdf)                    size: 17362 bytes
@@ -1005,7 +1010,7 @@ converted-to.pdf ./plots/randommapsmall.eps>
 (epstopdf)             \includegraphics on input line 108.
 Package epstopdf Info: Output file is already uptodate.
 
-<./plots/randommapsmall-eps-converted-to.pdf, id=52, 361.35pt x 252.945pt>
+<./plots/randommapsmall-eps-converted-to.pdf, id=49, 361.35pt x 252.945pt>
 File: ./plots/randommapsmall-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./plots/randommapsmall-eps-converted-to.pdf>
@@ -1024,7 +1029,7 @@ verted-to.pdf ./plots/randommap80.eps>
 (epstopdf)             \includegraphics on input line 111.
 Package epstopdf Info: Output file is already uptodate.
 
-<./plots/randommap80-eps-converted-to.pdf, id=53, 361.35pt x 252.945pt>
+<./plots/randommap80-eps-converted-to.pdf, id=50, 361.35pt x 252.945pt>
 File: ./plots/randommap80-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./plots/randommap80-eps-converted-to.pdf>
@@ -1043,7 +1048,7 @@ verted-to.pdf ./plots/randommap90.eps>
 (epstopdf)             \includegraphics on input line 112.
 Package epstopdf Info: Output file is already uptodate.
 
-<./plots/randommap90-eps-converted-to.pdf, id=54, 361.35pt x 252.945pt>
+<./plots/randommap90-eps-converted-to.pdf, id=51, 361.35pt x 252.945pt>
 File: ./plots/randommap90-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./plots/randommap90-eps-converted-to.pdf>
@@ -1058,12 +1063,12 @@ Package logreq Info: Writing requests to 'writeup.run.xml'.
  )
 
 Here is how much of LuaTeX's memory you used:
- 21271 strings out of 494449
+ 21272 strings out of 494449
  100000,662416 words of node,token memory allocated
- 407 words of node memory still in use:
+ 408 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 45 glue_spec, 1 write nodes
-   avail lists: 1:1,2:28,3:363,4:1898,5:560,6:5840,7:172,9:495,10:524
- 23795 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:28,3:373,4:2058,5:600,6:6305,7:174,9:515,10:572
+ 23796 multiletter control sequences out of 65536+600000
  110 fonts using 3223979 bytes
  56i,10n,56p,2290b,939s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/pkg/s
@@ -1084,7 +1089,7 @@ ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/pkg/share/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmti10.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmtt10.pfb></usr/pkg/share/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb>
-Output written on writeup.pdf (10 pages, 371436 bytes).
+Output written on writeup.pdf (10 pages, 373789 bytes).
 
 PDF statistics: 148 PDF objects out of 1000 (max. 8388607)
  100 compressed objects within 1 object stream

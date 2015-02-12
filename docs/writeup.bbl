@@ -213,6 +213,44 @@
   \field{year}{1998}
 \endentry
 
+\entry{minut2001reinforcement}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Minut}{M.}%
+     {Silviu}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mahadevan}{M.}%
+     {Sridhar}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {ACM}%
+  }
+  \strng{namehash}{MSMS1}
+  \strng{fullhash}{MSMS1}
+  \field{sortinit}{M}
+  \field{booktitle}{Proceedings of the Fifth International Conference on
+  Autonomous Agents}
+  \verb{doi}
+  \verb 10.1145/375735.376414
+  \endverb
+  \field{isbn}{1-58113-326-X}
+  \field{pages}{457\bibrangedash 464}
+  \field{series}{AGENTS '01}
+  \field{title}{A Reinforcement Learning Model of Selective Visual Attention}
+  \verb{url}
+  \verb http://doi.acm.org/10.1145/375735.376414
+  \endverb
+  \list{location}{1}{%
+    {Montreal, Quebec, Canada}%
+  }
+  \field{year}{2001}
+  \warn{\item Can't use 'location' + 'address'}
+\endentry
+
 \entry{parkhurst2002modeling}{article}{}
   \name{author}{3}{}{%
     {{}%
